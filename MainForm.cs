@@ -1,5 +1,6 @@
 using SmartInventory.Data;
 using SmartInventory.Models;
+using System.ComponentModel;
 using System.Diagnostics;
 
 
@@ -12,29 +13,28 @@ namespace SmartInventory
         //   btnAdd/btnUpdate/btnDelete、btnCheck、lblTotal
         //
         // TODO（13-1）：宣告全部商品清單
-        //   private List<Product> all = new List<Product>();
+        private List<Product> all = new List<Product>();
+
+        // 綁定畫面用
+        private BindingList<Product> view = new BindingList<Product>();
 
         public MainForm()
         {
             InitializeComponent();
+            dgv.DataSource = view;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.MultiSelect = false;
+
             DbHelper.InitDb();
-            Product p = new Product();
-            p.Name = "藍芽耳機1";
-            p.Category = "3C";
-            p.Quantity = 5;
-            p.Price = 100;
+            all = DbHelper.GetAllProducts();
 
-            DbHelper.InsertProduct(p);
-
-            DbHelper.InsertProduct(new Product()
+            foreach (var p in all)
             {
-                Name = "藍芽耳機2",
-                Category = "3C",
-                Quantity = 10,
-                Price = 699.8M
-            });
+                Debug.WriteLine(p);
+            }
 
-
+            RefreshView();
 
             // TODO（13-1）：啟動就讀資料庫
             //   DbHelper.InitDb();
@@ -51,6 +51,40 @@ namespace SmartInventory
             //   btnChart.Click += (_, _) => new ChartForm(all).ShowDialog();
             //   flowLayoutPanel1.Controls.Add(btnChart);
         }
+
+        public void RefreshView()
+        {
+            view.Clear();
+
+            foreach (var p in all)
+            {
+                view.Add(p);
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ReadInput();
+        }
+
+
+        private bool ReadInput()
+        {
+            if (txtName.Text.Trim() == "" || txtCategory.Text.Trim() == "")
+            {
+                MessageBox.Show("商品名稱或分類不能為空!");
+                return false;
+            }
+
+            if (!int.TryParse(txtQuantity.Text, out int q) || q <= 0)
+            {
+                MessageBox.Show("數量輸入不正確!");
+                return false;
+            }
+
+            return true;
+        }
+
 
         // ───── 以下方法 13-2 才會寫（按鈕事件可在 Designer 雙擊自動產生）─────
         // 13-2：RefreshView()             刷新清單與總價值（用 ProductService.Search 過濾）

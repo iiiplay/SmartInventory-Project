@@ -33,42 +33,6 @@ namespace SmartInventory.Data
             }
         }
 
-
-        public static List<Product> GetAllItems()
-        {
-            var result = new List<Product>();
-
-            using (var conn = new SqliteConnection(connStr))
-            {
-                conn.Open();
-                string sql = "select * from item";
-
-                using (var cmd = new SqliteCommand(sql, conn))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var item = new Product();
-
-                            // CTRL+K+C CTRL+K+U
-                            //item.id = convert.toint32(reader["id"]);
-                            //item.date = convert.todatetime(reader["date"]);
-                            //item.amount = convert.todecimal(reader["amount"]);
-                            //item.note = reader["note"].tostring()!;
-                            //item.categorytype = (category)enum.parse(typeof(category), reader["category"].tostring()!);
-                            //item.isincome = convert.toint32(reader["isincome"]) == 1;
-
-                            result.Add(item);
-                        }
-                    }
-                }
-            }
-
-
-            return result;
-        }
-
         //新增資料
         public static void InsertProduct(Product p)
         {
@@ -85,12 +49,50 @@ namespace SmartInventory.Data
                     cmd.Parameters.AddWithValue("@Name", p.Name);
                     cmd.Parameters.AddWithValue("@Category", p.Category);
                     cmd.Parameters.AddWithValue("@Quantity", p.Quantity);
-                    cmd.Parameters.AddWithValue("@Price",(double) p.Price);                  
+                    cmd.Parameters.AddWithValue("@Price", (double)p.Price);
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+
+
+        public static List<Product> GetAllProducts()
+        {
+            var result = new List<Product>();
+
+            using (var conn = new SqliteConnection(connStr))
+            {
+                conn.Open();
+                string sql = "select * from Products";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var p = new Product();
+
+                            // CTRL+K+C CTRL+K+U
+                            p.Id = Convert.ToInt32(reader["Id"]);
+                            p.Name = reader["Name"].ToString()!;
+                            p.Category = reader["Category"].ToString()!;
+                            p.Quantity = Convert.ToInt32(reader["Quantity"]);
+                            p.Price = Convert.ToDecimal(reader["Price"]);
+
+                            result.Add(p);
+                        }
+                    }
+                }
+            }
+
+
+            return result;
+        }
+
+      
 
 
         // 刪除
