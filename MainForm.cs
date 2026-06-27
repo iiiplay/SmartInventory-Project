@@ -1,4 +1,7 @@
+using SmartInventory.Data;
 using SmartInventory.Models;
+using System.Diagnostics;
+
 
 namespace SmartInventory
 {
@@ -14,15 +17,22 @@ namespace SmartInventory
         public MainForm()
         {
             InitializeComponent();
-
+            DbHelper.InitDb();
             Product p = new Product();
-            p.Id = 1;
-            p.Name = "45w 充電器";
-            // M=>decimal
-            p.Price = 599.5M;
-            p.Quantity = 20;
+            p.Name = "藍芽耳機1";
+            p.Category = "3C";
+            p.Quantity = 5;
+            p.Price = 100;
 
-            Console.WriteLine(p);
+            DbHelper.InsertProduct(p);
+
+            DbHelper.InsertProduct(new Product()
+            {
+                Name = "藍芽耳機2",
+                Category = "3C",
+                Quantity = 10,
+                Price = 699.8M
+            });
 
 
 
