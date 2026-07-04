@@ -33,6 +33,9 @@ namespace SmartInventory
             cmbCategory.Items.AddRange(ProductService.Categories);
             cmbCategory.SelectedIndex = 0;
 
+            cmbInputCategory.Items.AddRange(ProductService.Categories);
+            cmbInputCategory.SelectedIndex = 0;
+
 
             DbHelper.InitDb();
             all = DbHelper.GetAllProducts();
@@ -85,7 +88,8 @@ namespace SmartInventory
 
         private void ClearInput()
         {
-            TextBox[] boxs = { txtName, txtCategory, txtPrice, txtQuantity };
+            TextBox[] boxs = { txtName, txtPrice, txtQuantity };
+            //cmbInputCategory.SelectedIndex = 0;
             foreach (var b in boxs) b.Text = string.Empty;
         }
 
@@ -93,7 +97,7 @@ namespace SmartInventory
         private bool ReadInput(out Product product)
         {
             product = new Product();
-            if (txtName.Text.Trim() == "" || txtCategory.Text.Trim() == "")
+            if (txtName.Text.Trim() == "" || cmbInputCategory.Text == "")
             {
                 MessageBox.Show("商品名稱或分類不能為空!");
                 return false;
@@ -112,7 +116,7 @@ namespace SmartInventory
             }
 
             product.Name = txtName.Text;
-            product.Category = txtCategory.Text;
+            product.Category = cmbInputCategory.Text;
             product.Quantity = q;
             product.Price = p;
 
@@ -129,7 +133,7 @@ namespace SmartInventory
             if (e.RowIndex < 0 || e.RowIndex >= view.Count) return;
             var p = view[e.RowIndex];
             txtName.Text = p.Name;
-            txtCategory.Text = p.Category;
+            cmbInputCategory.Text = p.Category;
             txtQuantity.Text = p.Quantity.ToString();
             txtPrice.Text = p.Price.ToString();
         }

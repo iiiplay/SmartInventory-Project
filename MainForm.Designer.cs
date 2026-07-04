@@ -30,12 +30,12 @@ partial class MainForm
             cmbCategory = new ComboBox();
             btnCheck = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
+            cmbInputCategory = new ComboBox();
             label6 = new Label();
             txtPrice = new TextBox();
             label5 = new Label();
             txtQuantity = new TextBox();
             label4 = new Label();
-            txtCategory = new TextBox();
             label3 = new Label();
             txtName = new TextBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
@@ -124,12 +124,12 @@ partial class MainForm
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(cmbInputCategory, 1, 1);
             tableLayoutPanel2.Controls.Add(label6, 0, 3);
             tableLayoutPanel2.Controls.Add(txtPrice, 1, 3);
             tableLayoutPanel2.Controls.Add(label5, 0, 2);
             tableLayoutPanel2.Controls.Add(txtQuantity, 1, 2);
             tableLayoutPanel2.Controls.Add(label4, 0, 1);
-            tableLayoutPanel2.Controls.Add(txtCategory, 1, 1);
             tableLayoutPanel2.Controls.Add(label3, 0, 0);
             tableLayoutPanel2.Controls.Add(txtName, 1, 0);
             tableLayoutPanel2.Controls.Add(flowLayoutPanel2, 1, 4);
@@ -145,6 +145,16 @@ partial class MainForm
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel2.Size = new Size(200, 562);
             tableLayoutPanel2.TabIndex = 1;
+            // 
+            // cmbInputCategory
+            // 
+            cmbInputCategory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            cmbInputCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbInputCategory.FormattingEnabled = true;
+            cmbInputCategory.Location = new Point(40, 32);
+            cmbInputCategory.Name = "cmbInputCategory";
+            cmbInputCategory.Size = new Size(157, 23);
+            cmbInputCategory.TabIndex = 9;
             // 
             // label6
             // 
@@ -191,14 +201,6 @@ partial class MainForm
             label4.Size = new Size(31, 15);
             label4.TabIndex = 2;
             label4.Text = "分類";
-            // 
-            // txtCategory
-            // 
-            txtCategory.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtCategory.Location = new Point(40, 32);
-            txtCategory.Name = "txtCategory";
-            txtCategory.Size = new Size(157, 23);
-            txtCategory.TabIndex = 3;
             // 
             // label3
             // 
@@ -350,7 +352,6 @@ partial class MainForm
     private Label label3;
     private TextBox txtPrice;
     private TextBox txtQuantity;
-    private TextBox txtCategory;
     private TextBox txtName;
     private FlowLayoutPanel flowLayoutPanel2;
     private Button btnAdd;
@@ -360,5 +361,6 @@ partial class MainForm
     private FlowLayoutPanel flowLayoutPanel3;
     private Label lblTotal;
         private Button btnClear;
+        private ComboBox cmbInputCategory;
     }
 }
