@@ -64,12 +64,20 @@ namespace SmartInventory
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ReadInput();
+            if (ReadInput(out Product p))
+            {
+                //插入資料庫
+                DbHelper.InsertProduct(p);
+                all = DbHelper.GetAllProducts();
+                //更新畫面                
+                RefreshView();
+            }
         }
 
 
-        private bool ReadInput()
+        private bool ReadInput(out Product product)
         {
+            product = new Product();
             if (txtName.Text.Trim() == "" || txtCategory.Text.Trim() == "")
             {
                 MessageBox.Show("商品名稱或分類不能為空!");
@@ -81,6 +89,17 @@ namespace SmartInventory
                 MessageBox.Show("數量輸入不正確!");
                 return false;
             }
+
+            if (!decimal.TryParse(txtPrice.Text, out decimal p) || p <= 0)
+            {
+                MessageBox.Show("金額輸入不正確!");
+                return false;
+            }
+
+            product.Name = txtName.Text;
+            product.Category = txtCategory.Text;
+            product.Quantity = q;
+            product.Price = p;
 
             return true;
         }
