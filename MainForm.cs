@@ -62,9 +62,10 @@ namespace SmartInventory
 
         public void RefreshView()
         {
+            //  篩選機制
+            var filtered = ProductService.Search(all, txtSearch.Text.Trim(), cmbCategory.Text);
             view.Clear();
-
-            foreach (var p in all)
+            foreach (var p in filtered)
             {
                 view.Add(p);
             }
@@ -160,7 +161,7 @@ namespace SmartInventory
         {
             if (dgv.CurrentRow == null) return;
 
-            if (!ReadInput(out Product p)) return;          
+            if (!ReadInput(out Product p)) return;
 
             int index = dgv.CurrentRow.Index;
             //取得對應商品的實際Id
@@ -175,6 +176,16 @@ namespace SmartInventory
 
             //維持當下位置
             dgv.Rows[index].Selected = true;
+        }
+
+        private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshView();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            RefreshView();
         }
 
 

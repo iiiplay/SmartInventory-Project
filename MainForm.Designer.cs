@@ -86,6 +86,7 @@ partial class MainForm
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(180, 23);
             txtSearch.TabIndex = 1;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // label2
             // 
@@ -106,6 +107,7 @@ partial class MainForm
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(121, 23);
             cmbCategory.TabIndex = 3;
+            cmbCategory.SelectedIndexChanged += cmbCategory_SelectedIndexChanged;
             // 
             // btnCheck
             // 
