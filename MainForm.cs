@@ -1,5 +1,6 @@
 using SmartInventory.Data;
 using SmartInventory.Models;
+using SmartInventory.Services;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -25,7 +26,14 @@ namespace SmartInventory
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.MultiSelect = false;
-          
+
+
+            //設定ComboBox
+            cmbCategory.Items.Add("全部");
+            cmbCategory.Items.AddRange(ProductService.Categories);
+            cmbCategory.SelectedIndex = 0;
+
+
             DbHelper.InitDb();
             all = DbHelper.GetAllProducts();
 
