@@ -25,7 +25,7 @@ namespace SmartInventory
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.MultiSelect = false;
-
+          
             DbHelper.InitDb();
             all = DbHelper.GetAllProducts();
 
@@ -123,9 +123,7 @@ namespace SmartInventory
             txtCategory.Text = p.Category;
             txtQuantity.Text = p.Quantity.ToString();
             txtPrice.Text = p.Price.ToString();
-
         }
-
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -141,7 +139,7 @@ namespace SmartInventory
             all = DbHelper.GetAllProducts();
             RefreshView();
 
-            if (view.Count > 0) 
+            if (view.Count > 0)
             {
                 if (index >= view.Count) index = view.Count - 1;
             }
@@ -150,7 +148,26 @@ namespace SmartInventory
             dgv.Rows[index].Selected = true;
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgv.CurrentRow == null) return;
 
+            if (!ReadInput(out Product p)) return;          
+
+            int index = dgv.CurrentRow.Index;
+            //取得對應商品的實際Id
+            p.Id = view[index].Id;
+
+            if (MessageBox.Show($"是否更新Id:{p.Id}-{p.Name}", "確認",
+                MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            //更新商品
+            DbHelper.UpdateProduct(p);
+            all = DbHelper.GetAllProducts();
+            RefreshView();
+
+            //維持當下位置
+            dgv.Rows[index].Selected = true;
+        }
 
 
         // ───── 以下方法 13-2 才會寫（按鈕事件可在 Designer 雙擊自動產生）─────

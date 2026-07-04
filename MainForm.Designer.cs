@@ -247,6 +247,7 @@ partial class MainForm
             btnUpdate.TabIndex = 1;
             btnUpdate.Text = "更新";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDelete
             // 
@@ -281,7 +282,7 @@ partial class MainForm
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.Size = new Size(784, 562);
             dgv.TabIndex = 2;
-            dgv.CellClick += dgv_CellClick;       
+            dgv.CellClick += dgv_CellClick;
             // 
             // flowLayoutPanel3
             // 
