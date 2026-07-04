@@ -64,14 +64,20 @@ namespace SmartInventory
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (ReadInput(out Product p))
-            {
-                //插入資料庫
-                DbHelper.InsertProduct(p);
-                all = DbHelper.GetAllProducts();
-                //更新畫面                
-                RefreshView();
-            }
+            if (!ReadInput(out Product p)) return;
+
+            //插入資料庫
+            DbHelper.InsertProduct(p);
+            all = DbHelper.GetAllProducts();
+            //更新畫面                
+            RefreshView();
+            ClearInput();
+        }
+
+        private void ClearInput()
+        {
+            TextBox[] boxs = { txtName, txtCategory, txtPrice, txtQuantity };
+            foreach (var b in boxs) b.Text = string.Empty;
         }
 
 
@@ -103,6 +109,48 @@ namespace SmartInventory
 
             return true;
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearInput();
+        }
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= view.Count) return;
+            var p = view[e.RowIndex];
+            txtName.Text = p.Name;
+            txtCategory.Text = p.Category;
+            txtQuantity.Text = p.Quantity.ToString();
+            txtPrice.Text = p.Price.ToString();
+
+        }
+
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgv.CurrentRow == null) return;
+
+            int index = dgv.CurrentRow.Index;
+            var p = view[index];
+
+            if (MessageBox.Show($"是否刪除Id:{p.Id}-{p.Name}", "確認",
+                MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            DbHelper.DeleteProduct(p);
+            all = DbHelper.GetAllProducts();
+            RefreshView();
+
+            if (view.Count > 0) 
+            {
+                if (index >= view.Count) index = view.Count - 1;
+            }
+
+            //維持當下位置
+            dgv.Rows[index].Selected = true;
+        }
+
+
 
 
         // ───── 以下方法 13-2 才會寫（按鈕事件可在 Designer 雙擊自動產生）─────
