@@ -64,27 +64,30 @@ partial class MainForm
             flowLayoutPanel1.Controls.Add(btnCheck);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(10, 5, 10, 5);
-            flowLayoutPanel1.Size = new Size(984, 39);
+            flowLayoutPanel1.Padding = new Padding(13, 6, 13, 6);
+            flowLayoutPanel1.Size = new Size(1265, 49);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
-            label1.Location = new Point(13, 12);
+            label1.Location = new Point(17, 15);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(54, 19);
             label1.TabIndex = 0;
             label1.Text = "搜尋：";
             // 
             // txtSearch
             // 
             txtSearch.Anchor = AnchorStyles.None;
-            txtSearch.Location = new Point(62, 8);
+            txtSearch.Location = new Point(79, 11);
+            txtSearch.Margin = new Padding(4, 4, 4, 4);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(180, 23);
+            txtSearch.Size = new Size(230, 27);
             txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
@@ -92,9 +95,10 @@ partial class MainForm
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
-            label2.Location = new Point(248, 12);
+            label2.Location = new Point(317, 15);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(43, 15);
+            label2.Size = new Size(54, 19);
             label2.TabIndex = 2;
             label2.Text = "分類：";
             // 
@@ -103,21 +107,24 @@ partial class MainForm
             cmbCategory.Anchor = AnchorStyles.None;
             cmbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbCategory.FormattingEnabled = true;
-            cmbCategory.Location = new Point(297, 8);
+            cmbCategory.Location = new Point(379, 11);
+            cmbCategory.Margin = new Padding(4, 4, 4, 4);
             cmbCategory.Name = "cmbCategory";
-            cmbCategory.Size = new Size(121, 23);
+            cmbCategory.Size = new Size(154, 27);
             cmbCategory.TabIndex = 3;
             cmbCategory.SelectedIndexChanged += cmbCategory_SelectedIndexChanged;
             // 
             // btnCheck
             // 
             btnCheck.Anchor = AnchorStyles.None;
-            btnCheck.Location = new Point(424, 8);
+            btnCheck.Location = new Point(541, 10);
+            btnCheck.Margin = new Padding(4, 4, 4, 4);
             btnCheck.Name = "btnCheck";
-            btnCheck.Size = new Size(75, 23);
+            btnCheck.Size = new Size(96, 29);
             btnCheck.TabIndex = 4;
             btnCheck.Text = "庫存警示";
             btnCheck.UseVisualStyleBackColor = true;
+            btnCheck.Click += btnCheck_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -134,7 +141,8 @@ partial class MainForm
             tableLayoutPanel2.Controls.Add(txtName, 1, 0);
             tableLayoutPanel2.Controls.Add(flowLayoutPanel2, 1, 4);
             tableLayoutPanel2.Dock = DockStyle.Left;
-            tableLayoutPanel2.Location = new Point(0, 39);
+            tableLayoutPanel2.Location = new Point(0, 49);
+            tableLayoutPanel2.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 5;
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
@@ -142,8 +150,8 @@ partial class MainForm
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(200, 562);
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanel2.Size = new Size(257, 712);
             tableLayoutPanel2.TabIndex = 1;
             // 
             // cmbInputCategory
@@ -151,54 +159,60 @@ partial class MainForm
             cmbInputCategory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cmbInputCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbInputCategory.FormattingEnabled = true;
-            cmbInputCategory.Location = new Point(40, 32);
+            cmbInputCategory.Location = new Point(51, 39);
+            cmbInputCategory.Margin = new Padding(4, 4, 4, 4);
             cmbInputCategory.Name = "cmbInputCategory";
-            cmbInputCategory.Size = new Size(157, 23);
+            cmbInputCategory.Size = new Size(202, 27);
             cmbInputCategory.TabIndex = 9;
             // 
             // label6
             // 
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.Location = new Point(3, 94);
+            label6.Location = new Point(4, 113);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(31, 15);
+            label6.Size = new Size(39, 19);
             label6.TabIndex = 6;
             label6.Text = "單價";
             // 
             // txtPrice
             // 
             txtPrice.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtPrice.Location = new Point(40, 90);
+            txtPrice.Location = new Point(51, 109);
+            txtPrice.Margin = new Padding(4, 4, 4, 4);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(157, 23);
+            txtPrice.Size = new Size(202, 27);
             txtPrice.TabIndex = 7;
             // 
             // label5
             // 
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.Location = new Point(3, 65);
+            label5.Location = new Point(4, 78);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(31, 15);
+            label5.Size = new Size(39, 19);
             label5.TabIndex = 4;
             label5.Text = "數量";
             // 
             // txtQuantity
             // 
             txtQuantity.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtQuantity.Location = new Point(40, 61);
+            txtQuantity.Location = new Point(51, 74);
+            txtQuantity.Margin = new Padding(4, 4, 4, 4);
             txtQuantity.Name = "txtQuantity";
-            txtQuantity.Size = new Size(157, 23);
+            txtQuantity.Size = new Size(202, 27);
             txtQuantity.TabIndex = 5;
             // 
             // label4
             // 
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
-            label4.Location = new Point(3, 36);
+            label4.Location = new Point(4, 43);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(31, 15);
+            label4.Size = new Size(39, 19);
             label4.TabIndex = 2;
             label4.Text = "分類";
             // 
@@ -206,18 +220,20 @@ partial class MainForm
             // 
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
-            label3.Location = new Point(3, 7);
+            label3.Location = new Point(4, 8);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(31, 15);
+            label3.Size = new Size(39, 19);
             label3.TabIndex = 0;
             label3.Text = "名稱";
             // 
             // txtName
             // 
             txtName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtName.Location = new Point(40, 3);
+            txtName.Location = new Point(51, 4);
+            txtName.Margin = new Padding(4, 4, 4, 4);
             txtName.Name = "txtName";
-            txtName.Size = new Size(157, 23);
+            txtName.Size = new Size(202, 27);
             txtName.TabIndex = 1;
             // 
             // flowLayoutPanel2
@@ -228,16 +244,18 @@ partial class MainForm
             flowLayoutPanel2.Controls.Add(btnDelete);
             flowLayoutPanel2.Controls.Add(btnClear);
             flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.Location = new Point(3, 119);
+            flowLayoutPanel2.Location = new Point(4, 144);
+            flowLayoutPanel2.Margin = new Padding(4, 4, 4, 4);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(194, 440);
+            flowLayoutPanel2.Size = new Size(249, 564);
             flowLayoutPanel2.TabIndex = 8;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(3, 3);
+            btnAdd.Location = new Point(4, 4);
+            btnAdd.Margin = new Padding(4, 4, 4, 4);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 23);
+            btnAdd.Size = new Size(96, 29);
             btnAdd.TabIndex = 0;
             btnAdd.Text = "新增";
             btnAdd.UseVisualStyleBackColor = true;
@@ -245,9 +263,10 @@ partial class MainForm
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(84, 3);
+            btnUpdate.Location = new Point(108, 4);
+            btnUpdate.Margin = new Padding(4, 4, 4, 4);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(75, 23);
+            btnUpdate.Size = new Size(96, 29);
             btnUpdate.TabIndex = 1;
             btnUpdate.Text = "更新";
             btnUpdate.UseVisualStyleBackColor = true;
@@ -255,9 +274,10 @@ partial class MainForm
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(3, 32);
+            btnDelete.Location = new Point(4, 41);
+            btnDelete.Margin = new Padding(4, 4, 4, 4);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
+            btnDelete.Size = new Size(96, 29);
             btnDelete.TabIndex = 2;
             btnDelete.Text = "刪除";
             btnDelete.UseVisualStyleBackColor = true;
@@ -265,9 +285,10 @@ partial class MainForm
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(84, 32);
+            btnClear.Location = new Point(108, 41);
+            btnClear.Margin = new Padding(4, 4, 4, 4);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(75, 23);
+            btnClear.Size = new Size(96, 29);
             btnClear.TabIndex = 3;
             btnClear.Text = "清除";
             btnClear.UseVisualStyleBackColor = true;
@@ -280,11 +301,13 @@ partial class MainForm
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv.Dock = DockStyle.Fill;
-            dgv.Location = new Point(200, 39);
+            dgv.Location = new Point(257, 49);
+            dgv.Margin = new Padding(4, 4, 4, 4);
             dgv.Name = "dgv";
             dgv.ReadOnly = true;
+            dgv.RowHeadersWidth = 51;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.Size = new Size(784, 562);
+            dgv.Size = new Size(1008, 712);
             dgv.TabIndex = 2;
             dgv.CellClick += dgv_CellClick;
             // 
@@ -295,10 +318,11 @@ partial class MainForm
             flowLayoutPanel3.BorderStyle = BorderStyle.FixedSingle;
             flowLayoutPanel3.Controls.Add(lblTotal);
             flowLayoutPanel3.Dock = DockStyle.Bottom;
-            flowLayoutPanel3.Location = new Point(200, 570);
+            flowLayoutPanel3.Location = new Point(257, 721);
+            flowLayoutPanel3.Margin = new Padding(4, 4, 4, 4);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Padding = new Padding(6);
-            flowLayoutPanel3.Size = new Size(784, 31);
+            flowLayoutPanel3.Padding = new Padding(8, 8, 8, 8);
+            flowLayoutPanel3.Size = new Size(1008, 40);
             flowLayoutPanel3.TabIndex = 3;
             // 
             // lblTotal
@@ -307,21 +331,23 @@ partial class MainForm
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Microsoft JhengHei UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 136);
             lblTotal.ForeColor = Color.FromArgb(0, 192, 0);
-            lblTotal.Location = new Point(9, 6);
+            lblTotal.Location = new Point(12, 8);
+            lblTotal.Margin = new Padding(4, 0, 4, 0);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(105, 17);
+            lblTotal.Size = new Size(136, 22);
             lblTotal.TabIndex = 0;
             lblTotal.Text = "總庫存價值：$ 0";
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 601);
+            ClientSize = new Size(1265, 761);
             Controls.Add(flowLayoutPanel3);
             Controls.Add(dgv);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(flowLayoutPanel1);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SmartInventory 智能庫存管理系統";

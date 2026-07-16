@@ -10,6 +10,32 @@ namespace SmartInventory.Services
 {
     public static class ProductService
     {
+        public static (decimal, int) GetTotalValue(List<Product> all)
+        {
+            decimal sum = 0;
+            int qty = 0;
+            foreach (var p in all) sum += p.TotalValue; // 每筆的 數量×單價
+            foreach (var p in all) qty += p.Quantity; // 每筆的 數量×單價
+
+            return (sum, qty);
+        }
+
+        public static List<Product> GetLowStack(List<Product> all)
+        {
+            int lowStock = 10;
+
+            var result = new List<Product>();
+            foreach (var p in all)
+            {
+                if (p.Quantity < lowStock)
+                {
+                    result.Add(p);
+                }
+            }
+
+            return result;
+        }
+
 
         public static readonly string[] Categories =
         { "電子", "生活", "文具", "食品"};

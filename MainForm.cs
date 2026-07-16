@@ -72,6 +72,9 @@ namespace SmartInventory
             {
                 view.Add(p);
             }
+
+            var (total, qty) = ProductService.GetTotalValue(all);
+            lblTotal.Text = $"總庫存價值：$ {total}    數量為: {qty}";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -190,6 +193,31 @@ namespace SmartInventory
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             RefreshView();
+        }
+
+
+        private bool isCheckMode = false;
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            isCheckMode = !isCheckMode;
+
+            if (isCheckMode)
+            {
+                btnCheck.Text = "恢復";
+                //  篩選機制
+                var filtered = ProductService.GetLowStack(all);
+                view.Clear();
+                foreach (var p in filtered)
+                {
+                    view.Add(p);
+                }
+            }
+            else
+            {
+                btnCheck.Text = "庫存警示";
+                cmbCategory.SelectedIndex = 0;
+                RefreshView();
+            }
         }
 
 
