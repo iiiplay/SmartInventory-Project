@@ -49,17 +49,22 @@ partial class MainForm
             btnUpdate = new Button();
             btnDelete = new Button();
             btnClear = new Button();
-            dgv = new DataGridView();
             flowLayoutPanel3 = new FlowLayoutPanel();
             lblTotal = new Label();
             panel1 = new Panel();
+            splitContainer1 = new SplitContainer();
+            dgv = new DataGridView();
             chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             flowLayoutPanel3.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chart).BeginInit();
             SuspendLayout();
             // 
@@ -308,22 +313,6 @@ partial class MainForm
             btnClear.UseVisualStyleBackColor = true;
             btnClear.Click += btnClear_Click;
             // 
-            // dgv
-            // 
-            dgv.AllowUserToAddRows = false;
-            dgv.AllowUserToDeleteRows = false;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv.Dock = DockStyle.Left;
-            dgv.Location = new Point(200, 39);
-            dgv.Name = "dgv";
-            dgv.ReadOnly = true;
-            dgv.RowHeadersWidth = 51;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.Size = new Size(675, 722);
-            dgv.TabIndex = 2;
-            dgv.CellClick += dgv_CellClick;
-            // 
             // flowLayoutPanel3
             // 
             flowLayoutPanel3.AutoSize = true;
@@ -331,10 +320,10 @@ partial class MainForm
             flowLayoutPanel3.BorderStyle = BorderStyle.FixedSingle;
             flowLayoutPanel3.Controls.Add(lblTotal);
             flowLayoutPanel3.Dock = DockStyle.Bottom;
-            flowLayoutPanel3.Location = new Point(875, 730);
+            flowLayoutPanel3.Location = new Point(200, 730);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
             flowLayoutPanel3.Padding = new Padding(6);
-            flowLayoutPanel3.Size = new Size(473, 31);
+            flowLayoutPanel3.Size = new Size(1148, 31);
             flowLayoutPanel3.TabIndex = 3;
             // 
             // lblTotal
@@ -351,18 +340,50 @@ partial class MainForm
             // 
             // panel1
             // 
-            panel1.Controls.Add(chart);
+            panel1.Controls.Add(splitContainer1);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(875, 39);
+            panel1.Location = new Point(200, 39);
             panel1.Name = "panel1";
-            panel1.Size = new Size(473, 691);
+            panel1.Size = new Size(1148, 691);
             panel1.TabIndex = 4;
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(dgv);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(chart);
+            splitContainer1.Size = new Size(1148, 691);
+            splitContainer1.SplitterDistance = 700;
+            splitContainer1.TabIndex = 1;
+            // 
+            // dgv
+            // 
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv.Dock = DockStyle.Fill;
+            dgv.Location = new Point(0, 0);
+            dgv.Name = "dgv";
+            dgv.ReadOnly = true;
+            dgv.RowHeadersWidth = 51;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.Size = new Size(700, 691);
+            dgv.TabIndex = 3;
             // 
             // chart
             // 
             chartArea1.Name = "ChartArea1";
             chart.ChartAreas.Add(chartArea1);
-            chart.Dock = DockStyle.Right;
+            chart.Dock = DockStyle.Fill;
             legend1.Name = "Legend1";
             chart.Legends.Add(legend1);
             chart.Location = new Point(0, 0);
@@ -371,8 +392,8 @@ partial class MainForm
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chart.Series.Add(series1);
-            chart.Size = new Size(473, 691);
-            chart.TabIndex = 0;
+            chart.Size = new Size(444, 691);
+            chart.TabIndex = 1;
             chart.Text = "chart1";
             // 
             // MainForm
@@ -382,7 +403,6 @@ partial class MainForm
             ClientSize = new Size(1348, 761);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel3);
-            Controls.Add(dgv);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(flowLayoutPanel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -394,10 +414,14 @@ partial class MainForm
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             flowLayoutPanel3.ResumeLayout(false);
             flowLayoutPanel3.PerformLayout();
             panel1.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ((System.ComponentModel.ISupportInitialize)chart).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -423,7 +447,6 @@ partial class MainForm
     private Button btnAdd;
     private Button btnUpdate;
     private Button btnDelete;
-    private DataGridView dgv;
     private FlowLayoutPanel flowLayoutPanel3;
     private Label lblTotal;
         private Button btnClear;
@@ -431,6 +454,8 @@ partial class MainForm
         private Button btnChart;
         private Button btnExport;
         private Panel panel1;
+        private SplitContainer splitContainer1;
+        private DataGridView dgv;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
     }
 }
