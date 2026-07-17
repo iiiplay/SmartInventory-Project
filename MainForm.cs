@@ -5,6 +5,7 @@ using SmartInventory.Services;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Forms.DataVisualization.Charting;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 
@@ -24,7 +25,7 @@ namespace SmartInventory
 
         public MainForm()
         {
-            InitializeComponent();
+            InitializeComponent();       
             dgv.DataSource = view;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
@@ -42,28 +43,32 @@ namespace SmartInventory
 
             DbHelper.InitDb();
             all = DbHelper.GetAllProducts();
-
-            foreach (var p in all)
-            {
-                Debug.WriteLine(p);
-            }
-
             RefreshView();
+        }
 
-            // TODO（13-1）：啟動就讀資料庫
-            //   DbHelper.InitDb();
-            //   all = DbHelper.GetAllProducts();
+        private void InitializeChartInfrastructure()
+        {
+            chart.ChartAreas.Clear();
+            chart.Legends.Clear();
 
-            // TODO（13-2）：接上畫面
-            //   宣告 BindingList<Product> view，dgv.DataSource = view;
-            //   cmbCategory 加入「全部/電子/生活/文具/食品」並 SelectedIndex = 0;
-            //   掛事件：txtSearch.TextChanged、cmbCategory.SelectedIndexChanged、dgv.CellClick → RefreshView/帶入欄位;
-            //   呼叫 RefreshView();
+            // --- 1. 左邊：數量直條圖區域 ---
+            var areaQty = new ChartArea("AreaQuantity");
+            areaQty.AxisX.MajorGrid.Enabled = false;
+            areaQty.AxisY.MajorGrid.Enabled = false;
+            chart.ChartAreas.Add(areaQty);
 
-            // TODO（13-3）：動態加「統計圖表」按鈕
-            //   var btnChart = new Button { Text = "統計圖表", AutoSize = true };
-            //   btnChart.Click += (_, _) => new ChartForm(all).ShowDialog();
-            //   flowLayoutPanel1.Controls.Add(btnChart);
+            // --- 2. 右邊：金額環形圖區域 ---
+            var areaValue = new ChartArea("AreaValue");
+            chart.ChartAreas.Add(areaValue);
+
+            // 圖例統一設定於下方置中
+            var legend = new Legend("L")
+            {
+                Docking = Docking.Bottom,
+                Alignment = StringAlignment.Center
+            };
+            chart.Legends.Add(legend);          
+          
         }
 
         public void RefreshView()
@@ -78,6 +83,10 @@ namespace SmartInventory
 
             var (total, qty) = ProductService.GetTotalValue(all);
             lblTotal.Text = $"總庫存價值：$ {total}    數量為: {qty}";
+
+            InitializeChartInfrastructure();
+            var stat = ProductService.Statistics(all); // 統計各分類
+            ChartServices.DrawChart(chart,stat); // 繪製圖表
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

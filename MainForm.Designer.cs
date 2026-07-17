@@ -23,6 +23,10 @@ partial class MainForm
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             flowLayoutPanel1 = new FlowLayoutPanel();
             label1 = new Label();
             txtSearch = new TextBox();
@@ -30,6 +34,7 @@ partial class MainForm
             cmbCategory = new ComboBox();
             btnCheck = new Button();
             btnChart = new Button();
+            btnExport = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             cmbInputCategory = new ComboBox();
             label6 = new Label();
@@ -47,12 +52,15 @@ partial class MainForm
             dgv = new DataGridView();
             flowLayoutPanel3 = new FlowLayoutPanel();
             lblTotal = new Label();
-            btnExport = new Button();
+            panel1 = new Panel();
+            chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             flowLayoutPanel3.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chart).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -70,7 +78,7 @@ partial class MainForm
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(10, 5, 10, 5);
-            flowLayoutPanel1.Size = new Size(984, 39);
+            flowLayoutPanel1.Size = new Size(1348, 39);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -135,6 +143,17 @@ partial class MainForm
             btnChart.UseVisualStyleBackColor = true;
             btnChart.Click += btnChart_Click;
             // 
+            // btnExport
+            // 
+            btnExport.Anchor = AnchorStyles.None;
+            btnExport.Location = new Point(586, 8);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(75, 23);
+            btnExport.TabIndex = 6;
+            btnExport.Text = "輸出CSV";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += btnExport_Click;
+            // 
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.ColumnCount = 2;
@@ -159,7 +178,7 @@ partial class MainForm
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(200, 562);
+            tableLayoutPanel2.Size = new Size(200, 722);
             tableLayoutPanel2.TabIndex = 1;
             // 
             // cmbInputCategory
@@ -246,7 +265,7 @@ partial class MainForm
             flowLayoutPanel2.Dock = DockStyle.Fill;
             flowLayoutPanel2.Location = new Point(3, 119);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(194, 440);
+            flowLayoutPanel2.Size = new Size(194, 600);
             flowLayoutPanel2.TabIndex = 8;
             // 
             // btnAdd
@@ -295,13 +314,13 @@ partial class MainForm
             dgv.AllowUserToDeleteRows = false;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv.Dock = DockStyle.Fill;
+            dgv.Dock = DockStyle.Left;
             dgv.Location = new Point(200, 39);
             dgv.Name = "dgv";
             dgv.ReadOnly = true;
             dgv.RowHeadersWidth = 51;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.Size = new Size(784, 562);
+            dgv.Size = new Size(675, 722);
             dgv.TabIndex = 2;
             dgv.CellClick += dgv_CellClick;
             // 
@@ -312,10 +331,10 @@ partial class MainForm
             flowLayoutPanel3.BorderStyle = BorderStyle.FixedSingle;
             flowLayoutPanel3.Controls.Add(lblTotal);
             flowLayoutPanel3.Dock = DockStyle.Bottom;
-            flowLayoutPanel3.Location = new Point(200, 570);
+            flowLayoutPanel3.Location = new Point(875, 730);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
             flowLayoutPanel3.Padding = new Padding(6);
-            flowLayoutPanel3.Size = new Size(784, 31);
+            flowLayoutPanel3.Size = new Size(473, 31);
             flowLayoutPanel3.TabIndex = 3;
             // 
             // lblTotal
@@ -323,33 +342,50 @@ partial class MainForm
             lblTotal.Anchor = AnchorStyles.None;
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Microsoft JhengHei UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lblTotal.ForeColor = Color.FromArgb(0, 192, 0);
+            lblTotal.ForeColor = Color.Black;
             lblTotal.Location = new Point(9, 6);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(105, 17);
             lblTotal.TabIndex = 0;
             lblTotal.Text = "總庫存價值：$ 0";
             // 
-            // btnExport
+            // panel1
             // 
-            btnExport.Anchor = AnchorStyles.None;
-            btnExport.Location = new Point(586, 8);
-            btnExport.Name = "btnExport";
-            btnExport.Size = new Size(75, 23);
-            btnExport.TabIndex = 6;
-            btnExport.Text = "輸出CSV";
-            btnExport.UseVisualStyleBackColor = true;
-            btnExport.Click += btnExport_Click;
+            panel1.Controls.Add(chart);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(875, 39);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(473, 691);
+            panel1.TabIndex = 4;
+            // 
+            // chart
+            // 
+            chartArea1.Name = "ChartArea1";
+            chart.ChartAreas.Add(chartArea1);
+            chart.Dock = DockStyle.Right;
+            legend1.Name = "Legend1";
+            chart.Legends.Add(legend1);
+            chart.Location = new Point(0, 0);
+            chart.Name = "chart";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart.Series.Add(series1);
+            chart.Size = new Size(473, 691);
+            chart.TabIndex = 0;
+            chart.Text = "chart1";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 601);
+            ClientSize = new Size(1348, 761);
+            Controls.Add(panel1);
             Controls.Add(flowLayoutPanel3);
             Controls.Add(dgv);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(flowLayoutPanel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SmartInventory 智能庫存管理系統";
@@ -361,6 +397,8 @@ partial class MainForm
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             flowLayoutPanel3.ResumeLayout(false);
             flowLayoutPanel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chart).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -392,5 +430,7 @@ partial class MainForm
         private ComboBox cmbInputCategory;
         private Button btnChart;
         private Button btnExport;
+        private Panel panel1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart;
     }
 }
