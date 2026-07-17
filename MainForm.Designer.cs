@@ -29,6 +29,7 @@ partial class MainForm
             label2 = new Label();
             cmbCategory = new ComboBox();
             btnCheck = new Button();
+            btnChart = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             cmbInputCategory = new ComboBox();
             label6 = new Label();
@@ -46,7 +47,7 @@ partial class MainForm
             dgv = new DataGridView();
             flowLayoutPanel3 = new FlowLayoutPanel();
             lblTotal = new Label();
-            btnChart = new Button();
+            btnExport = new Button();
             flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -64,6 +65,7 @@ partial class MainForm
             flowLayoutPanel1.Controls.Add(cmbCategory);
             flowLayoutPanel1.Controls.Add(btnCheck);
             flowLayoutPanel1.Controls.Add(btnChart);
+            flowLayoutPanel1.Controls.Add(btnExport);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -121,6 +123,17 @@ partial class MainForm
             btnCheck.Text = "庫存警示";
             btnCheck.UseVisualStyleBackColor = true;
             btnCheck.Click += btnCheck_Click;
+            // 
+            // btnChart
+            // 
+            btnChart.Anchor = AnchorStyles.None;
+            btnChart.Location = new Point(505, 8);
+            btnChart.Name = "btnChart";
+            btnChart.Size = new Size(75, 23);
+            btnChart.TabIndex = 5;
+            btnChart.Text = "繪製圖示";
+            btnChart.UseVisualStyleBackColor = true;
+            btnChart.Click += btnChart_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -301,7 +314,7 @@ partial class MainForm
             flowLayoutPanel3.Dock = DockStyle.Bottom;
             flowLayoutPanel3.Location = new Point(200, 570);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Padding = new Padding(6, 6, 6, 6);
+            flowLayoutPanel3.Padding = new Padding(6);
             flowLayoutPanel3.Size = new Size(784, 31);
             flowLayoutPanel3.TabIndex = 3;
             // 
@@ -317,16 +330,16 @@ partial class MainForm
             lblTotal.TabIndex = 0;
             lblTotal.Text = "總庫存價值：$ 0";
             // 
-            // btnChart
+            // btnExport
             // 
-            btnChart.Anchor = AnchorStyles.None;
-            btnChart.Location = new Point(505, 8);
-            btnChart.Name = "btnChart";
-            btnChart.Size = new Size(75, 23);
-            btnChart.TabIndex = 5;
-            btnChart.Text = "繪製圖示";
-            btnChart.UseVisualStyleBackColor = true;
-            btnChart.Click += btnChart_Click;
+            btnExport.Anchor = AnchorStyles.None;
+            btnExport.Location = new Point(586, 8);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(75, 23);
+            btnExport.TabIndex = 6;
+            btnExport.Text = "輸出CSV";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += btnExport_Click;
             // 
             // MainForm
             // 
@@ -378,5 +391,6 @@ partial class MainForm
         private Button btnClear;
         private ComboBox cmbInputCategory;
         private Button btnChart;
+        private Button btnExport;
     }
 }

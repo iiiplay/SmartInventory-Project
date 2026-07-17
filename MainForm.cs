@@ -4,6 +4,8 @@ using SmartInventory.Models;
 using SmartInventory.Services;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 
 namespace SmartInventory
@@ -200,7 +202,7 @@ namespace SmartInventory
         private bool isCheckMode = false;
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            
+
 
 
             isCheckMode = !isCheckMode;
@@ -233,7 +235,43 @@ namespace SmartInventory
             //    Debug.WriteLine($"{kv.Key} => {kv.Value[0]} {kv.Value[1]}");
             //}
 
-            new ChartForm(all).ShowDialog(); 
+            new ChartForm(all).ShowDialog();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (all.Count == 0) { return; }
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "CSV檔案|*.csv";
+            var now = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            // 取得程式執行的當下目錄，並設為預設存檔路徑
+            dialog.InitialDirectory = Application.StartupPath;
+            dialog.FileName = $"SmartInventory{now}.csv";
+
+            if (dialog.ShowDialog() != DialogResult.OK) return;
+
+            //寫入檔案
+            using (StreamWriter sw = new StreamWriter(
+                dialog.FileName, false, Encoding.Unicode))
+            {
+                sw.WriteLine("編號,分類,產品名稱,數量,單價,總計");
+
+                foreach (Product p in all)
+                {
+                    string line = string.Format(
+                        "{0},{1},{2},{3},{4},{5}",
+                        p.Id,
+                        p.Category,
+                        p.Name,
+                        p.Quantity,
+                        p.Price,
+                        p.TotalValue
+                        );
+
+                    sw.WriteLine(line);
+                }
+            }
         }
 
 
