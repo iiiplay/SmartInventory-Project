@@ -1,13 +1,22 @@
-﻿using MySql.Data.MySqlClient; // 統一使用 MySQL 命名空間
+﻿using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient; // 統一使用 MySQL 命名空間
 using SmartInventory.Models;
-
 namespace SmartInventory.Data
 {
     public static class MySqlDbHelper
     {
-        // 建議將此字串移至設定檔 (appsettings.json) 管理
-        private static string connStr = "Server=gateway01.ap-northeast-1.prod.aws.tidbcloud.com;Database=test;Uid=2hHvwQxgGwjw5Cd.root;Pwd=ksvSYOWV8Gbx81VC;Port=4000;SslMode=Preferred;";
+        private static string? connStr;
 
+        // 靜態建構函式：在類別第一次被使用時自動執行
+        static MySqlDbHelper()
+        {
+            var builder = new ConfigurationBuilder()     
+            .AddJsonFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json"), optional: false, reloadOnChange: true);
+            IConfiguration config = builder.Build();
+
+            // 從設定檔讀取連線字串
+            connStr = config.GetConnectionString("TiDB");
+        }
 
         public static bool CheckAccount(string userName, string password)
         {

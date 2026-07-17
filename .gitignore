@@ -4,7 +4,7 @@
 
 .vs/
 
-
+appsettings.json
 # User-specific files
 *.suo
 *.user
