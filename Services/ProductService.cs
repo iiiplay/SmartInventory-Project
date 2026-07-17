@@ -10,8 +10,29 @@ namespace SmartInventory.Services
 {
     public static class ProductService
     {
+        public static Dictionary<string, decimal[]> Statistics(List<Product> all)
+        {
+            // 分類 => 數量  "電子" =>45
+
+            var stat = new Dictionary<string, decimal[]>();
+            foreach (var p in all)
+            {
+                if (!stat.ContainsKey(p.Category))
+                {
+                    stat[p.Category] = [0, 0];
+                }
+
+                stat[p.Category][0] += p.Quantity;
+                stat[p.Category][1] += p.TotalValue;
+            }
+
+
+            return stat;
+        }
+
         public static (decimal, int) GetTotalValue(List<Product> all)
         {
+            //Calc(all);
             decimal sum = 0;
             int qty = 0;
             foreach (var p in all) sum += p.TotalValue; // 每筆的 數量×單價

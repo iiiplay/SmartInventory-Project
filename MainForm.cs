@@ -1,4 +1,5 @@
 using SmartInventory.Data;
+using SmartInventory.Forms;
 using SmartInventory.Models;
 using SmartInventory.Services;
 using System.ComponentModel;
@@ -199,6 +200,9 @@ namespace SmartInventory
         private bool isCheckMode = false;
         private void btnCheck_Click(object sender, EventArgs e)
         {
+            
+
+
             isCheckMode = !isCheckMode;
 
             if (isCheckMode)
@@ -218,6 +222,18 @@ namespace SmartInventory
                 cmbCategory.SelectedIndex = 0;
                 RefreshView();
             }
+        }
+
+        private void btnChart_Click(object sender, EventArgs e)
+        {
+            //var calcTotal = ProductService.Statistics(all);
+
+            //foreach (var kv in calcTotal)
+            //{
+            //    Debug.WriteLine($"{kv.Key} => {kv.Value[0]} {kv.Value[1]}");
+            //}
+
+            new ChartForm(all).ShowDialog(); 
         }
 
 
