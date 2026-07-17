@@ -31,7 +31,6 @@ namespace SmartInventory
             dgv.AllowUserToDeleteRows = false;
             dgv.MultiSelect = false;
 
-
             //設定ComboBox
             cmbCategory.Items.Add("全部");
             cmbCategory.Items.AddRange(ProductService.Categories);
@@ -40,9 +39,8 @@ namespace SmartInventory
             cmbInputCategory.Items.AddRange(ProductService.Categories);
             cmbInputCategory.SelectedIndex = 0;
 
-
-            DbHelper.InitDb();
-            all = DbHelper.GetAllProducts();
+            MySqlDbHelper.InitDb();
+            all = MySqlDbHelper.GetAllProducts();
             RefreshView();
         }
 
@@ -94,8 +92,8 @@ namespace SmartInventory
             if (!ReadInput(out Product p)) return;
 
             //插入資料庫
-            DbHelper.InsertProduct(p);
-            all = DbHelper.GetAllProducts();
+            MySqlDbHelper.InsertProduct(p);
+            all = MySqlDbHelper.GetAllProducts();
             //更新畫面                
             RefreshView();
             ClearInput();
@@ -163,8 +161,8 @@ namespace SmartInventory
             if (MessageBox.Show($"是否刪除Id:{p.Id}-{p.Name}", "確認",
                 MessageBoxButtons.YesNo) != DialogResult.Yes) return;
 
-            DbHelper.DeleteProduct(p);
-            all = DbHelper.GetAllProducts();
+            MySqlDbHelper.DeleteProduct(p);
+            all = MySqlDbHelper.GetAllProducts();
             RefreshView();
 
             if (view.Count > 0)
@@ -189,8 +187,8 @@ namespace SmartInventory
             if (MessageBox.Show($"是否更新Id:{p.Id}-{p.Name}", "確認",
                 MessageBoxButtons.YesNo) != DialogResult.Yes) return;
             //更新商品
-            DbHelper.UpdateProduct(p);
-            all = DbHelper.GetAllProducts();
+            MySqlDbHelper.UpdateProduct(p);
+            all = MySqlDbHelper.GetAllProducts();
             RefreshView();
 
             //維持當下位置

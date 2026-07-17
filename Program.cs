@@ -1,3 +1,5 @@
+using SmartInventory.Forms;
+
 namespace SmartInventory
 {
     internal static class Program
@@ -6,7 +8,13 @@ namespace SmartInventory
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            //Application.Run(new LoginForm());
+
+            var login = new LoginForm();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new MainForm());
+            }
         }
     }
 }
