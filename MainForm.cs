@@ -1,8 +1,10 @@
 using SmartInventory.Data;
+using SmartInventory.Forms;
 using SmartInventory.Models;
 using SmartInventory.Services;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
 
 
 namespace SmartInventory
@@ -215,9 +217,17 @@ namespace SmartInventory
         private void btnChart_Click(object sender, EventArgs e)
         {
             var stat = ProductService.Statistics(all);
-            Debug.WriteLine(stat["電子"][0]);          
-            Debug.WriteLine(stat["電子"][1]);
 
+            var sb = new StringBuilder();
+            foreach (var (k, v) in stat)
+            {
+                sb.AppendLine($"{k}  數量:{v[0]} 金額:{v[1]}");
+            }
+
+            var chartForm = new ChartForm();
+            chartForm.ShowDialog();
+
+            //MessageBox.Show(sb.ToString(), "分類資訊");
         }
 
 
