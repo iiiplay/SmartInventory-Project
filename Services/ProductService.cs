@@ -15,6 +15,29 @@ namespace SmartInventory.Services
         { "電子", "生活", "文具", "食品"};
 
 
+
+        public static Dictionary<string, decimal[]> Statistics(List<Product> all)
+        {
+            // 字典 <TKey,TValue>
+            var stat = new Dictionary<string, decimal[]>();
+            foreach (var p in all)
+            {
+                // 檢查key是否存在(不存在需要初始化)
+                if (!stat.ContainsKey(p.Category))
+                {
+                    stat[p.Category] = new decimal[2];
+                }
+
+                //數量
+                stat[p.Category][0] += p.Quantity;
+                //金額
+                stat[p.Category][1] += p.TotalValue;
+            }
+
+            return stat;
+        }
+
+
         public static (decimal, int) GetTotalValue(List<Product> all)
         {
             decimal total = 0;
