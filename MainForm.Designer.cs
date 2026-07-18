@@ -29,6 +29,7 @@ partial class MainForm
             label2 = new Label();
             cmbCategory = new ComboBox();
             btnCheck = new Button();
+            nudStockNum = new NumericUpDown();
             tableLayoutPanel2 = new TableLayoutPanel();
             cmbInputCategory = new ComboBox();
             label6 = new Label();
@@ -47,6 +48,7 @@ partial class MainForm
             flowLayoutPanel3 = new FlowLayoutPanel();
             lblTotal = new Label();
             flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudStockNum).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
@@ -62,6 +64,7 @@ partial class MainForm
             flowLayoutPanel1.Controls.Add(label2);
             flowLayoutPanel1.Controls.Add(cmbCategory);
             flowLayoutPanel1.Controls.Add(btnCheck);
+            flowLayoutPanel1.Controls.Add(nudStockNum);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -118,6 +121,17 @@ partial class MainForm
             btnCheck.TabIndex = 4;
             btnCheck.Text = "庫存警示";
             btnCheck.UseVisualStyleBackColor = true;
+            btnCheck.Click += btnCheck_Click;
+            // 
+            // nudStockNum
+            // 
+            nudStockNum.Location = new Point(505, 8);
+            nudStockNum.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+            nudStockNum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudStockNum.Name = "nudStockNum";
+            nudStockNum.Size = new Size(120, 23);
+            nudStockNum.TabIndex = 5;
+            nudStockNum.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // tableLayoutPanel2
             // 
@@ -306,7 +320,7 @@ partial class MainForm
             lblTotal.Anchor = AnchorStyles.None;
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Microsoft JhengHei UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lblTotal.ForeColor = Color.FromArgb(0, 192, 0);
+            lblTotal.ForeColor = Color.Black;
             lblTotal.Location = new Point(9, 6);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(105, 17);
@@ -327,6 +341,7 @@ partial class MainForm
             Text = "SmartInventory 智能庫存管理系統";
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudStockNum).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
@@ -362,5 +377,6 @@ partial class MainForm
     private Label lblTotal;
         private Button btnClear;
         private ComboBox cmbInputCategory;
+        private NumericUpDown nudStockNum;
     }
 }

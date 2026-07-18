@@ -26,7 +26,8 @@ namespace SmartInventory
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.MultiSelect = false;
-
+            nudStockNum.Minimum = 0;
+            nudStockNum.Maximum = 10000;
 
             //設定ComboBox
             cmbCategory.Items.Add("全部");
@@ -39,11 +40,6 @@ namespace SmartInventory
 
             DbHelper.InitDb();
             all = DbHelper.GetAllProducts();
-
-            foreach (var p in all)
-            {
-                Debug.WriteLine(p);
-            }
 
             RefreshView();
 
@@ -72,6 +68,9 @@ namespace SmartInventory
             {
                 view.Add(p);
             }
+
+            var (total, qty) = ProductService.GetTotalValue(all);
+            lblTotal.Text = $"總庫存價值：$ {total}  |  總庫存數量：{qty}";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -190,6 +189,27 @@ namespace SmartInventory
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             RefreshView();
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            int lowStock = (int)nudStockNum.Value;
+            var result = ProductService.GetLowStock(all, lowStock);
+
+            if (result.Count == 0)
+            {
+                MessageBox.Show("庫存狀況良好!");
+                return;
+            }
+
+            string lowStockStr = $"低庫存警告:少於{lowStock}數量\n\n";
+
+            foreach (var p in result)
+            {
+                lowStockStr += $"{p.Name} 數量:{p.Quantity}\n";
+            }
+
+            MessageBox.Show(lowStockStr);
         }
 
 
