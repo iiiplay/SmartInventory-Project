@@ -40,6 +40,8 @@ namespace SmartInventory
             cmbInputCategory.SelectedIndex = 0;
 
 
+            MySqlDbHelper.InitDb();
+
             DbHelper.InitDb();
             all = DbHelper.GetAllProducts();
 
