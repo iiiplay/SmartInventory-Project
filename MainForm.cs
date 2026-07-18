@@ -216,18 +216,8 @@ namespace SmartInventory
 
         private void btnChart_Click(object sender, EventArgs e)
         {
-            var stat = ProductService.Statistics(all);
-
-            var sb = new StringBuilder();
-            foreach (var (k, v) in stat)
-            {
-                sb.AppendLine($"{k}  數量:{v[0]} 金額:{v[1]}");
-            }
-
-            var chartForm = new ChartForm();
-            chartForm.ShowDialog();
-
-            //MessageBox.Show(sb.ToString(), "分類資訊");
+            var chartForm = new ChartForm(all);
+            chartForm.Show();
         }
 
 
